@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FoodService } from '../services/food.service';
 
 @Component({
   selector: 'app-tab1',
@@ -8,7 +9,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class Tab1Page implements OnInit {
   form: FormGroup;
-  constructor() {}
+  constructor(private foodService: FoodService) {}
+
   ngOnInit(): void {
     this.form = new FormGroup({
       foodName: new FormControl(null, {
@@ -21,5 +23,6 @@ export class Tab1Page implements OnInit {
   }
   add() {
     console.log(this.form.value);
+    this.foodService.addFood(this.form.value);
   }
 }
