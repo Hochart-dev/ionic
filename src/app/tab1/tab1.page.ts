@@ -16,7 +16,7 @@ export class Tab1Page implements OnInit {
       foodName: new FormControl(null, {
         validators: [Validators.required],
       }),
-      datePlaceInFreezer: new FormControl(null, {
+      datePlacedInFreezer: new FormControl(null, {
         validators: [Validators.required],
       }),
     });
