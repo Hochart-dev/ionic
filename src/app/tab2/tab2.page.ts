@@ -14,4 +14,8 @@ export class Tab2Page implements OnInit {
     this.allFoodInFreezer = this.foodService.allFood;
     console.log('ngOnInit', this.allFoodInFreezer);
   }
+  ionViewWillEnter() {
+    this.allFoodInFreezer = this.foodService.allFood;
+    console.log('IonViewWillEnter', this.allFoodInFreezer);
+  }
 }
