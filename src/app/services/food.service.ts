@@ -6,6 +6,8 @@ import {
 } from '@angular/fire/compat/firestore';
 import { DocumentChangeAction } from '@angular/fire/compat/firestore';
 
+import { from, Observable } from 'rxjs';
+
 import { Food } from '../interfaces/food.model';
 
 @Injectable({
@@ -26,5 +28,9 @@ export class FoodService {
 
   addFood(foodItem: Food): Promise<DocumentReference> {
     return this.afs.collection('freezer').add(foodItem);
+  }
+
+  deleteFood(id: string): Observable<any> {
+    return from(this.afs.doc(`freezer/${id}`).delete());
   }
 }

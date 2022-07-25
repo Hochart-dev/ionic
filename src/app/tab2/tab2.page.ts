@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { Food } from '../interfaces/food.model';
 import { FoodService } from '../services/food.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tab2',
@@ -11,6 +12,8 @@ import { FoodService } from '../services/food.service';
 export class Tab2Page implements OnInit, OnDestroy {
   allFoodInFreezer = [];
   sub: Subscription;
+  isLoading = false;
+
   constructor(private foodService: FoodService) {}
 
   ngOnInit() {
@@ -32,6 +35,27 @@ export class Tab2Page implements OnInit, OnDestroy {
   ionViewWillEnter() {
     // this.allFoodInFreezer = this.foodService.allFood;
     console.log('IonViewWillEnter', this.allFoodInFreezer);
+  }
+
+  edit(id) {
+    console.log('id', id);
+  }
+
+  delete(id) {
+    console.log('id', id);
+    this.isLoading = true;
+    this.foodService
+      .deleteFood(id)
+      .pipe(take(1))
+      .subscribe(
+        (data) => {
+          this.isLoading = false;
+        },
+        (err) => {
+          this.isLoading = false;
+          console.error(err);
+        }
+      );
   }
 
   ngOnDestroy(): void {
