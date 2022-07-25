@@ -1,6 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  DocumentReference,
+} from '@angular/fire/compat/firestore';
 import { DocumentChangeAction } from '@angular/fire/compat/firestore';
 
 import { Food } from '../interfaces/food.model';
@@ -21,8 +24,7 @@ export class FoodService {
     return this.afs.collection('freezer').snapshotChanges();
   }
 
-  addFood(foodItem: Food) {
-    // this._allFood = [foodItem, ...this._allFood];
-    // console.log(this._allFood);
+  addFood(foodItem: Food): Promise<DocumentReference> {
+    return this.afs.collection('freezer').add(foodItem);
   }
 }
